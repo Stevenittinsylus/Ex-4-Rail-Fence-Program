@@ -1,4 +1,5 @@
-<img width="405" height="173" alt="image" src="https://github.com/user-attachments/assets/e90664fc-a3d4-4287-874e-fd8081937ca5" /># Ex-5 Rail-Fence-Program
+
+## Ex-5 Rail-Fence-Program
 
 # IMPLEMENTATION OF RAIL FENCE – ROW & COLUMN TRANSFORMATION TECHNIQUE
 
