@@ -26,38 +26,59 @@ STEP-5: Read the characters row wise or column wise in the former order to get t
 
 # PROGRAM
 ```
- #include <stdio.h>
- #include <string.h>
- #include <ctype.h>
- void encryptRailFence(char *message, int rails) {
- int len = strlen(message);
- char rail[rails][len];
- memset(rail, '\n', sizeof(rail));
- int row = 0, direction = 1;
- for (int i = 0; i < len; i++) {
- rail[row][i] = message[i];
- row += direction;
- if (row == rails- 1 | row == 0)
- direction =-direction;
- }
- printf("Encrypted text: ");
- for (int i = 0; i < rails; i++)
- for (int j = 0; j < len; j++)
- if (rail[i][j] != '\n')
- printf("%c", rail[i][j]);
- printf("\n");
- }
- int main() {
- char message[100];
- int rails;
- printf("Enter a Secret Message: ");
- scanf("%s", message);
- printf("Enter number of rails: ");
- scanf("%d", &rails);
- encryptRailFence(message, rails);
- return 0;
- }
+#include <stdio.h>
+#include <string.h>
 
+void rail(char *m,int r,char *c,int d){
+    int n=strlen(m),i,j,k=0,row=0,dir=1;
+    char a[r][n]; memset(a,'\n',sizeof(a));
+
+    for(i=0;i<n;i++){                 // mark / fill
+        a[row][i]= d? '*' : m[i];
+        if(row==0) dir=1; else if(row==r-1) dir=-1;
+        row+=dir;
+    }
+
+    if(d)                             // fill cipher into pattern
+        for(i=0;i<r;i++)
+            for(j=0;j<n;j++)
+                if(a[i][j]=='*') a[i][j]=m[k++];
+
+    row=0; dir=1;
+    for(i=0;i<n;i++){                 // read zigzag
+        c[i]=a[row][i];
+        if(row==0) dir=1; else if(row==r-1) dir=-1;
+        row+=dir;
+    }
+    c[n]=0;
+
+    if(!d){                           // encryption output order
+        k=0;
+        for(i=0;i<r;i++)
+            for(j=0;j<n;j++)
+                if(a[i][j]!='\n') c[k++]=a[i][j];
+        c[k]=0;
+    }
+}
+
+int main(){
+    char m[100],c[100],p[100];
+    int r;
+
+    printf("Msg & rails: ");
+    fgets(m,100,stdin);
+    m[strcspn(m,"\n")]=0;
+    scanf("%d",&r);
+
+    rail(m,r,c,0);
+    printf("Enc: %s\n",c);
+
+    rail(c,r,p,1);
+    printf("Dec: %s\n",p);
+
+    return 0;
+}
+ 
 ```
 
 # OUTPUT
