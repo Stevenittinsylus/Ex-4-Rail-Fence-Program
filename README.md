@@ -69,7 +69,7 @@ int main() {
 
     return 0;
 }
-1``
+```
 # OUTPUT
 <img width="405" height="173" alt="image" src="https://github.com/user-attachments/assets/ef2ea458-5a1b-4427-8804-ce03cb3e5706" />
 
